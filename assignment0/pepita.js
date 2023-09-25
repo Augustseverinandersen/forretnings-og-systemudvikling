@@ -11,7 +11,7 @@ class Bird {
     // constructor is a method.
     // When a new object of class bird is created the constructor will set energy to 0.
     constructor(){
-        this.energy = 0;
+        this.energy = 0; // Attribute 
     } 
     // gramsEaten is a method with one parameter that calculates energy gained by eating. 
     gramsEaten(x){
@@ -22,8 +22,8 @@ class Bird {
         this.energy -= n * 2;
     }
     // giveMeYourEnergy is a method that returns the current energy level. 
-    giveMeYourEnergy(){
-        return this.energy;
+    giveMeYourEnergy(){ // I think this is unnecessary
+        return this.energy; // you can just write "console.log(pepita.energy)"
     }
 }
 
@@ -37,7 +37,8 @@ pepita = new Bird()
 pepita.kmFlown(2) 
 // Writing a message that Pepita has easten 64 grams of birdseeds.
 pepita.gramsEaten(64) 
+// object = pepita, gramseaten(64) = message, 64 = is an argument because it is inside a message. 
 // Delegation. This is pepitas remaining energy level.
-pepita.giveMeYourEnergy() 
+pepita.giveMeYourEnergy() // Should not have a paranthese as there are no parameters.  
 // Writing to the console what Pepitas energy in joules is.
 console.log("Pepitas energy is: " + pepita.giveMeYourEnergy() + " Joules!")
