@@ -1,17 +1,25 @@
+// Creating class Formation. This is the parent class.
 class Formation{
+    // Creating constructor method with three arguments
     constructor(locomotives, passengerwagons, freightWagons){
+        // Assigning the arguments. When a formation is created, it must have these three arguments.  
         this.locomotives = locomotives;
         this.passengerwagons = passengerwagons;
         this.freightWagons = freightWagons;
-    }
-
-    totalNumberOfPassengers(){ // Works
-        return this.passengerwagons.reduce((total, passengerwagon) => total + passengerwagon.amountOfPassengers(), 0);
-
     };
-    lightWeightWagon(){ // Works 
+    // Creating a method to calculate the number of passengers in a formation. 
+    totalNumberOfPassengers(){
+        // The method uses the higher order function reduce, and a method from the class Passengerwagon, amountOfPassenger(). 
+        return this.passengerwagons.reduce((numOfPassengers, passengerwagon) => numOfPassengers + passengerwagon.amountOfPassengers(), 0);
+    };
+    // Creating a method to calculate the amount of light weight wagons in a formation.
+    lightWeightWagon(){
+        // Using the higher order function filter to find the passenger/freight wagons that weigh less than 2500. 
+        // I am using a method from the class Passengerwagon to find the passenger wagons weight. I am using a method from the class FreightWagon to find the freight wagons weight.
+        // Using ".length" to count the amount of passenger wagons weighing less than 2500.
         let passengerWeight = this.passengerwagons.filter((passengerwagon) => passengerwagon.maximumWeight() < 2500).length;
         let freightWeight = this.freightWagons.filter((freightWagon) => freightWagon.loadWithGaurds() < 2500).length;
+        // Returning the sum of the length of passenger/freight wagons weighing less than 2500.
         return passengerWeight + freightWeight
     };
     maximumSpeed(){ // works 
@@ -56,8 +64,6 @@ class Formation{
     }
 }
 
-
-
 // Works one on one 
 class PassengerWagon extends Formation{
     constructor({length, width}){ // Why does putting curly brackets around help.
@@ -79,9 +85,6 @@ class PassengerWagon extends Formation{
 
 }
 
-
-
-
 // Works one on one
 class Locomotive extends Formation{
     constructor({weight, pullForce, speed}){
@@ -95,7 +98,6 @@ class Locomotive extends Formation{
     }
 }
 
-
 // Works with one on one
 class FreightWagon extends Formation{
     constructor({maximumLoad}){
@@ -108,40 +110,45 @@ class FreightWagon extends Formation{
 }
 
 
+
+
 class Depot{
-    constructor(passengerwagons, freightWagons, locomotives){
+    constructor(passengerwagons, freightWagons, locomotives, formations, spareLocomotives){
         this.passengerwagons = passengerwagons;
         this.freightWagons = freightWagons;
         this.locomotives = locomotives;
+        this.formations = formations;
+        this.spareLocomotives = spareLocomotives;
 
 
     };
     heaviestWagons(){ // maybe works but can not see output
-        let heaviest = new Set();
+        let heaviest = 0;
 
         let passengerwagonWeight = 0;
         let freightwagonWeight = 0;
 
-        this.passengerwagons.forEach((passengerwagon) => {
-            if (passengerwagon.maximumWeight() < passengerwagonWeight){
+        this.passengerwagons.forEach((passengerwagon) => { // look into if you want to make parameter wagon 
+            if (passengerwagon.maximumWeight() > passengerwagonWeight){ // then you have to rename the maximumweight and loadwithguards
                 passengerwagonWeight = passengerwagon.maximumWeight();
             }     
         });
 
         
         this.freightWagons.forEach((freightWagon) => {
-            if (freightWagon.loadWithGaurds() < freightwagonWeight){
-                freightwagonWeight = freightWagon.maximumWeight();
+            if (freightWagon.loadWithGaurds() > freightwagonWeight){
+                freightwagonWeight = freightWagon.loadWithGaurds();
+                
             }     
         });
 
 
         if (passengerwagonWeight > freightwagonWeight){
-            heaviest.add(passengerwagonWeight)
+            heaviest = passengerwagonWeight + "Kg Passenger Wagon"
         }else {
-            heaviest.add(freightwagonWeight)
+            heaviest = freightwagonWeight + "Kg Freight Wagon"
         };
-
+   
         return heaviest;
 
     };
@@ -162,10 +169,41 @@ class Depot{
             return "This formation does not exceed the amount of units nor weight to need an experienced driver!"
         }
     };
+
+    addTrain(){
+        this.formations.push(spareLocomotives)
+    }
     addLocomotive(){
+
+// get thrust of depot trains
+        let passengerwagonWeight = this.passengerwagons.reduce((total, passengerwagon) => total + passengerwagon.maximumWeight(), 0);
+        let freightwagonWeight = this.freightWagons.reduce((total, freightWagon) => total + freightWagon.loadWithGaurds(), 0);
+        let formationPull = this.locomotives.reduce((total, locomotive) => total + locomotive.maximumPull(), 0);
+        let thrust = formationPull - (passengerwagonWeight + freightwagonWeight);
+// Calculate pull force of each spare locomotive 
+        if(thrust > 0){
+            return "hello"
+        }else{
+            spareLocomotives.forEach((spareLocomotive) => {
+               if(spareLocomotive.pullForce > thrust){
+                spareLocomotive.addTrain;
+               }
+            })
+
+        };
+
+
+
+// calculating thrust of sparelocomotives
 
     };
 };
+
+
+
+
+
+
 
 
 
@@ -183,10 +221,10 @@ let freightWagons =[
 
 let locomotives = [
     new Locomotive({weight: 800, pullForce: 11000, speed: 90}),
-    new Locomotive({weight: 1200, pullForce: 9000, speed: 70})
+    new Locomotive({weight: 1200, pullForce: 19000, speed: 70})
 ];
 
-let formation1 = new Formation(locomotives, passengerwagons, freightWagons);
+let train1 = new Formation(locomotives, passengerwagons, freightWagons);
 
 
 // Formation 2
@@ -205,12 +243,12 @@ let locomotives2 = [
 
 ];
 
-let formation2 = new Formation(locomotives2, passengerwagons2, freightWagons2);
+let train2 = new Formation(locomotives2, passengerwagons2, freightWagons2);
 
 
 
 // Answers 
-let formations = [formation1, formation2];
+let trains = [train1, train2];
 
 
 
@@ -218,7 +256,12 @@ let formations = [formation1, formation2];
 
 
 
-// Depots 
+let spareLocomotives =[
+    new Locomotive({weight: 1000, pullForce: 12000, speed: 90}),
+    new Locomotive({weight: 2000, pullForce: 13000, speed: 80}),
+    new Locomotive({weight: 1500, pullForce: 10000, speed: 60})
+]
+
 
 let depotPassengerWagons1 = [
     new PassengerWagon({length: 9, width: 2.6}),
@@ -233,12 +276,12 @@ let depotFreightWagons1 = [
 ];
 
 let depotLocomotives1 = [
-    new Locomotive({weight: 1000, pullForce: 12000, speed: 90}),
-    new Locomotive({weight: 1500, pullForce: 11000, speed: 100})
+    new Locomotive({weight: 1000, pullForce: 1000, speed: 90}),
+    new Locomotive({weight: 1500, pullForce: 1000, speed: 100})
 
 ]
 
-let depotFormation1 = new Depot(depotPassengerWagons1, depotFreightWagons1, depotLocomotives1)
+let depotTrain1 = new Depot(depotPassengerWagons1, depotFreightWagons1, depotLocomotives1) // Should it be new Depot or new Formation. If it is formation how will it access depot methods.
 
 
 
@@ -256,11 +299,9 @@ let depotLocomotives2 = [
 ]
 
 
-let depotFormation2 = new Depot(depotPassengerWagons2, depotFreightWagons2, depotLocomotives2)
+let depotTrain2 = new Depot(depotPassengerWagons2, depotFreightWagons2, depotLocomotives2)
 
-let depotFormations = [depotFormation1, depotFormation2]
-
-
+let depotTrains = [depotTrain1, depotTrain2]
 
 
 
@@ -269,21 +310,23 @@ let depotFormations = [depotFormation1, depotFormation2]
 
 
 
-formations.forEach((formation, index) => {
+trains.forEach((train, index) => {
     console.log(`\nFormation ${index + 1} Solution to tasks:`); // Template literal
-    console.log(`1. This formation can transport ${formation.totalNumberOfPassengers()} people!`);
-    console.log(`2. Amount of lightweight ${formation.lightWeightWagon()} wagons!`);
-    console.log(`3. The maximum spped of this formation is ${formation.maximumSpeed()}km/h!`);
-    console.log(`4. ${formation.isEfficient()} `);
-    console.log(`5. ${formation.isMoveable()} `);
-    console.log(`6. ${formation.missingThrust()} `);
+    console.log(`1. This formation can transport ${train.totalNumberOfPassengers()} people!`);
+    console.log(`2. Amount of lightweight ${train.lightWeightWagon()} wagons!`);
+    console.log(`3. The maximum spped of this formation is ${train.maximumSpeed()}km/h!`);
+    console.log(`4. ${train.isEfficient()} `);
+    console.log(`5. ${train.isMoveable()} `);
+    console.log(`6. ${train.missingThrust()} `);
 
 });
 
-depotFormations.forEach((depotFormation, index) => {
+depotTrains.forEach((depotTrain, index) => {
     console.log(`\nDepot-Formation ${index + 1} Solution to tasks:`); // Template literal - Python F-string
-
-    console.log(`8. ${depotFormation.experiencedDriver()} `)
+    console.log(`7. The heaviest wagon, in this formation, is a ${depotTrain.heaviestWagons()}`)
+    console.log(`8. ${depotTrain.experiencedDriver()} `);
+    
 });
-
-console.log(depotFormation1.heaviestWagons())
+console.log(depotTrain1)
+console.log(depotTrain1.addLocomotive())
+console.log(depotTrain1)
