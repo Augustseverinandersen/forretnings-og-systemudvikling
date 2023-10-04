@@ -7,16 +7,16 @@ In each depot, you can find: pre-assembled formations, and loose locomotives tha
 to a formation.
 For each passenger wagon, we know its length in meters and its useful width in meters. The
 number of passengers a passenger car can transport is as follows:
-• If the useful width is up to 2.5 meters: length in meters * 8.
-• If the useful width exceeds 2.5 meters: length in meters * 10.
+- If the useful width is up to 2.5 meters: length in meters * 8.
+- If the useful width exceeds 2.5 meters: length in meters * 10.
 For example, if we have two passenger wagons, both 10 meters long, one with a 2-meter width,
 and the other with a 3-meter width, then the first can carry 80 passengers, and the second can
 carry 100. A passenger car cannot carry cargo.
 We also know the maximum load capacity in kilograms for each freight wagon. A freight car
 cannot carry any passengers. There are no mixed-use wagons.
 The maximum weight of a wagon, measured in kilograms, is calculated as follows:
-• For a passenger car: the number of passengers it can carry * 80.
-• For a freight car: the maximum load it can carry + 160 (accounting for two guards in each
+- For a passenger car: the number of passengers it can carry * 80.
+- For a freight car: the maximum load it can carry + 160 (accounting for two guards in each
 freight car).
 We have information about each locomotive, including its weight, the maximum weight it can pull,
 and its maximum speed. For example, we may have a locomotive weighing 1000 kg, capable of
@@ -61,8 +61,8 @@ Download this file and open it with Visual Studio Code.
 Run the code and view the results in the output. 
 ### How to create your own formations
 Guide to creating a formation:
-- Initialize a new object with the class formation = ´´´let formation3 = new Formation()´´´
+- Initialize a new object with the class formation = ``let formation3 = new Formation()``
 - Create locomotives, passengerWagons, and freightWagons and give the arguments. 
-- - let locomotive3 = new Locomotive(weight, pullForce, speed)
-- - let passengerWagon3 = new PassengerWagon(length, width)
-- - let freightWagon3 = new FreightWagon()
+  - ``let locomotive3 = new Locomotive(weight, pullForce, speed)``
+  - ``let passengerWagon3 = new PassengerWagon(length, width)``
+  - ``let freightWagon3 = new FreightWagon()``
