@@ -73,6 +73,13 @@ Guide to creating a formation:
   - ``let passengerWagon3 = new PassengerWagon(length, width)``
   - ``let freightWagon3 = new FreightWagon()``
 - Add the units to the formation
-  - ``formation3.addLocomotives(locomotive3)``
-  - ``formation3.addWagons(passengerWagon3)``
-  - ``formation3.addWagons(freightWagon3)``
+  - ``formation3.addLocomotive(locomotive3)``
+  - ``formation3.addWagon(passengerWagon3)``
+  - ``formation3.addWagon(freightWagon3)``
+- Then add the newly created formation3 to the array ``trains``
+  - ``let trains = [formation1, formation2, formation3];``
+- Lastly, add the formation to the ``depot``
+  - ``depot.addFormation(formation1)``
+
+Now you have created a new formation. 
+ 
