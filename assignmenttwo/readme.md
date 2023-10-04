@@ -66,8 +66,13 @@ Download this file and open it with Visual Studio Code.
 Run the code and view the results in the output. 
 ### How to create your own formations
 Guide to creating a formation:
-- Initialize a new object with the class formation = ``let formation3 = new Formation()``
+- Initialize a new object with the class formation
+  -  ``let formation3 = new Formation()``
 - Create locomotives, passengerWagons, and freightWagons and give the arguments. 
   - ``let locomotive3 = new Locomotive(weight, pullForce, speed)``
   - ``let passengerWagon3 = new PassengerWagon(length, width)``
   - ``let freightWagon3 = new FreightWagon()``
+- Add the units to the formation
+  - ``formation3.addLocomotives(locomotive3)``
+  - ``formation3.addWagons(passengerWagon3)``
+  - ``formation3.addWagons(freightWagon3)``
