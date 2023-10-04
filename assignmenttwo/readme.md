@@ -71,7 +71,7 @@ Guide to creating a formation:
 - Create locomotives, passengerWagons, and freightWagons and give the arguments. 
   - ``let locomotive3 = new Locomotive(weight, pullForce, speed)``
   - ``let passengerWagon3 = new PassengerWagon(length, width)``
-  - ``let freightWagon3 = new FreightWagon()``
+  - ``let freightWagon3 = new FreightWagon(maximumLoad)``
 - Add the units to the formation
   - ``formation3.addLocomotive(locomotive3)``
   - ``formation3.addWagon(passengerWagon3)``
