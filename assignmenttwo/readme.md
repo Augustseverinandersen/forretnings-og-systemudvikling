@@ -9,21 +9,26 @@ For each passenger wagon, we know its length in meters and its useful width in m
 number of passengers a passenger car can transport is as follows:
 - If the useful width is up to 2.5 meters: length in meters * 8.
 - If the useful width exceeds 2.5 meters: length in meters * 10.
+
 For example, if we have two passenger wagons, both 10 meters long, one with a 2-meter width,
 and the other with a 3-meter width, then the first can carry 80 passengers, and the second can
 carry 100. A passenger car cannot carry cargo.
+
 We also know the maximum load capacity in kilograms for each freight wagon. A freight car
 cannot carry any passengers. There are no mixed-use wagons.
+
 The maximum weight of a wagon, measured in kilograms, is calculated as follows:
 - For a passenger car: the number of passengers it can carry * 80.
 - For a freight car: the maximum load it can carry + 160 (accounting for two guards in each
 freight car).
+
 We have information about each locomotive, including its weight, the maximum weight it can pull,
 and its maximum speed. For example, we may have a locomotive weighing 1000 kg, capable of
 pulling up to 12,000 kg, with a maximum speed of 80 km/h. It's important to note that
 locomotives must account for their own weight when calculating their pulling capacity. Therefore,
 a locomotive with a maximum useful drag capacity of 12,000 kg can only pull 11,000 kg of
 wagons, considering it weighs 1000 kg.
+
 Model this scenario according to the object-oriented paradigm and write code in the Javascript
 language to create at least two stereotypical formations/trains with one or more
 
