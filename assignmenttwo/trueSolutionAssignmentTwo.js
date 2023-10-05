@@ -222,6 +222,7 @@ class Locomotive extends Formation{
         return "This depot does not need an experienced driver";
       }
     }
+  // Task 9
     // This method adds a locomotive to a formation if it is missing thrust.
     addLocomotiveToFormation() {
       // For each formation in the depot, check if the formation is moveable.
