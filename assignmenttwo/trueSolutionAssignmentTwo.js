@@ -1,18 +1,4 @@
-
-
-// add how to create new formations 
-// add how to run the code 
-// Create UML diagram
-
-
-
-/* One way to pass variables between methods is to make a variable in the constructor eg: the weight of the wagons. 
-Then the first time you calculate the weight of the wagon, you can then return the answer to the variable. 
-The next time you need to use it, than you can just call the variable, but you have to make sure not to over write the value */
-
-
-
-
+// August Severin Andersen - solution for assignment two.
 
 // Creating class formation. This is the parent class for class Wagon and Class Locomotive.
 class Formation {
@@ -115,9 +101,10 @@ class Wagon extends Formation {
 }
 
 // This is the class Locomotive. This class is the blueprint for my locomotives.
-class Locomotive{
+class Locomotive extends Formation{
   // The constructor holds the arguments for the locomotives. 
     constructor(weight, pullForce, speed) {
+      super();
       // For the current locomotive its parameter weight = the constructors weight. 
       this.weight = weight;
       this.pullForce = pullForce;
@@ -248,7 +235,7 @@ class Locomotive{
           console.log("Current thrust " + missingThrust);
           // Using "filter" to find a spareLocomotive that has a maximum pull equal to or greater then the missing thrust of the formation.
           // "filter" creates a new array, which holds all the locomotives that fulfill the querry.
-          let suitableLocomotives = this.spareLocomotives.filter((locomotive) => locomotive.maximumPull() >= missingThrust); // ////////////////////////////////////// Does not work //////////////////////////////////////////////////////////////////////////////////////////////
+          let suitableLocomotives = this.spareLocomotives.filter((spareLocomotive) => spareLocomotive.maximumPull() >= missingThrust);          
           // Console logging the length of the new array of spare locomotives, for clarity.
           console.log("Amount of suitable spare locomotives: " + suitableLocomotives.length);
           // Adding the first locomotive in the array to the formation with missing thrust. 
@@ -275,7 +262,7 @@ let formation1 = new Formation();
 let locomotive1 = new Locomotive(1000, 12000, 80);
 let locomotive1_1 = new Locomotive(2400, 11000, 70)
 // creating passengerwagon objects with the class PassengerWagon, and the arguments: length, width.
-let passengerWagon1 = new PassengerWagon(13, 2.6);
+let passengerWagon1 = new PassengerWagon(12, 2.6);
 let passengerWagon1_1 = new PassengerWagon(8, 2)
 // Creating freightWagon objects with the class FreightWagon, and the arguments: maximumLoad. 
 let freightWagon1 = new FreightWagon(5000);
@@ -300,6 +287,7 @@ formation2.addLocomotive(locomotive2);
 formation2.addWagon(passengerWagon2);
 formation2.addWagon(freightWagon2);
 
+
 // Depot
 // Creating a object depot with the class Depot.
 let depot = new Depot();
@@ -308,12 +296,10 @@ depot.addFormation(formation1);
 depot.addFormation(formation2);
 // Creating a new object called spareLocomotives1 with the class Locomotive.
 let spareLocomotives1 = new Locomotive(1000, 10000, 80);
-let spareLocomotives2 = new Locomotive(1000, 1100, 70);
 // Using the method "addSpareLocomotive" to add the spareLocomotives to the array in the class Depot.
 depot.addSpareLocomotive(spareLocomotives1);
-depot.addSpareLocomotive(spareLocomotives2);
-  
 
+  
 // Output 
 // Creating an array to store the two formations.
 let trains = [formation1, formation2];

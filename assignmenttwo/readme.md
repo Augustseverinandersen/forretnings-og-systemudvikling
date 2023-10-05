@@ -83,3 +83,6 @@ Guide to creating a formation:
 
 Now you have created a new formation. 
  
+## UML Class Diagram
+
+![UML Class Diagram](image.png)
