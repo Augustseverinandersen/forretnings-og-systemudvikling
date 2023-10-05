@@ -81,6 +81,10 @@ Guide to creating a formation:
 - Lastly, add the formation to the ``depot``
   - ``depot.addFormation(formation1)``
 
+
+**OBS!** _Create the new formation after initializing the depot._
+
+
 Now you have created a new formation. 
  
 ## UML Class Diagram
