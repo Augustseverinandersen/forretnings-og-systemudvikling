@@ -22,9 +22,9 @@ class Formation {
   // This method calculates the amount of passengers in a formation, by using a method from class PassengerWagon.
   totalNumberOfPassengers() {
     // Using the higher order function "reduce".
-    return this.wagons.reduce((passengerCount, wagon) => {
+    return this.wagons.reduce((passengerCount, wagon) => { 
       // Checking to see if the currenct wagon is a object of the class PassengerWagon.
-      if (wagon instanceof PassengerWagon) {
+      if (wagon instanceof PassengerWagon) { // Not using polymorphism -------------------------------------------------------------------------------------------------------------------------
         // If it is, it uses the method "amountOfPassengers" to get the amount of passengers in the current passengerWagon.
         return passengerCount + wagon.amountOfPassengers();
       } else {
@@ -40,7 +40,8 @@ class Formation {
   // This method uses the higher order function "filter", which creates a new array of wagons that weigh over 2500. 
   // The length of the new array is then counted using ".length", and returned.
   lightWeightWagon() { 
-    return this.wagons.filter((wagon) => wagon.maximumWeight() < 2500).length
+    return this.wagons.filter((wagon) => wagon.maximumWeight() < 2500).length;
+
   }
 
 // Task 3
@@ -131,7 +132,7 @@ class Locomotive extends Formation{
     amountOfPassengers() {
       // The amount of passengers is calculated by using an if statement. 
       // If the width of the current passenger wagon is less then 2.5, then the length of the current wagon is multiplied by 8.
-        if (this.width < 2.5){
+        if (this.width <= 2.5){
           return this.length * 8;
       // If the current width is over 2.5 then the current length is mutliplied by 10
       } else{
