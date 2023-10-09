@@ -89,4 +89,4 @@ Now you have created a new formation.
  
 ## UML Class Diagram
 
-![UML Class Diagram](image-1.png)
+![UML Class Diagram](umlclassdiagram.png)
