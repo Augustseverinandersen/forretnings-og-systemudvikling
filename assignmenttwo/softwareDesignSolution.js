@@ -69,7 +69,7 @@ class Formation {
     let formationPull = this.locomotives.reduce((total, locomotive) => total + locomotive.maximumPull(), 0);
     // Lastly, I return a boolean. 
     return formationPull > weight;
-  }
+  } // return this.totalUsefulDrag() >= this.totalWagonsWeight()
   
 // Task 6
   // This method returns the remainingThrust of each formation.
@@ -223,6 +223,7 @@ class Locomotive extends Formation{
         return "This depot does not need an experienced driver";
       }
     }
+    
   // Task 9
     // This method adds a locomotive to a formation if it is missing thrust.
     addLocomotiveToFormation() {
