@@ -121,11 +121,12 @@ class Formation {
     // This is the class for passengerWagons, it inherits from the class Wagon. 
     class PassengerWagon extends Wagon {
       // The constructor holds the arguments for the passengerWagons.
-      constructor(length, width) {
+      constructor(length, width, id) {
         // Super referes to the parent class. Gets the parent classes constructor methods and properties when called in the constructor.
         super();
         this.length = length;
         this.width = width;
+        this.id = id;
       };
       // This method calculates the amount of passengers in a passenger wagon.
       amountOfPassengers() {
@@ -149,9 +150,10 @@ class Formation {
     // This is the class for freightWagons, it inherits from the class Wagon. 
     class FreightWagon extends Wagon {
       // The constructor holds the only argument for freightwagons.
-      constructor(maximumLoad) {
+      constructor(maximumLoad, id) {
         super()
         this.maximumLoad = maximumLoad;
+        this.id = id;
       }
       amountOfPassengers(){
         return 0;
@@ -179,37 +181,38 @@ class Formation {
       addSpareLocomotive(spareLocomotive){
         this.spareLocomotives.push(spareLocomotive);
       }
-  
-  // Task 7
-      // This method finds the heavest wagon in each formation.
-      heaviestWagons() {
-        // Initializing an empty array to store heaviest wagons.
-        let heaviestWagons = [];
-    
-        // A forEach loop that iterates through each formation in the depot.
-        this.formations.forEach((formation) => {
-            // A variable to store the heaviest wagon in the current formation.
-            let heaviestWagon = null;
-    
-            // For each wagon in the array of wagons in the formation.
-            formation.wagons.forEach((wagon) => {
-                // If there is no heaviest wagon yet or if the current wagon weighs more than the current heaviest wagon.
-                if (!heaviestWagon || wagon.maximumWeight() > heaviestWagon.maximumWeight()) {
-                    // Set the current wagon as the new heaviest wagon.
-                    heaviestWagon = wagon;
-                }
-            });
-    
-            // When the iteration of a formation is finished, push the heaviest wagon into the array "heaviestWagons".
-            if (heaviestWagon) {
-                heaviestWagons.push(heaviestWagon);
-            }
-        });
-    
-        // Return the array of heaviest wagon objects.
-        return heaviestWagons;
 
+// Task 7
+// This method finds the IDs of the heaviest wagons in each formation.
+heaviestWagons() {
+  // Initializing an empty array to store heaviest wagon IDs.
+  let heaviestWagonIds = [];
+
+  // A forEach loop that iterates through each formation in the depot.
+  this.formations.forEach((formation) => {
+    // Variables to store the heaviest wagon and its ID in the current formation.
+    let heaviestWagon = null;
+    let heaviestWagonId = null;
+
+    // For each wagon in the array of wagons in the formation.
+    formation.wagons.forEach((wagon) => {
+      // If there is no heaviest wagon yet or if the current wagon weighs more than the current heaviest wagon.
+      if (!heaviestWagon || wagon.maximumWeight() > heaviestWagon.maximumWeight()) {
+        // Set the current wagon as the new heaviest wagon.
+        heaviestWagon = wagon;
+        heaviestWagonId = wagon.id; // Store the ID of the heaviest wagon.
+      }
+    });
+
+    // When the iteration of a formation is finished, push the ID of the heaviest wagon into the array "heaviestWagonIds".
+    if (heaviestWagonId) {
+      heaviestWagonIds.push(heaviestWagonId);
     }
+  });
+
+  // Return the array of heaviest wagon IDs.
+  return heaviestWagonIds;
+}
 
   // Task 8
       // This method is used to see if any formation is over 20 units, or weighs more than 10,000kg. 
@@ -277,11 +280,11 @@ class Formation {
   let locomotive1 = new Locomotive(1000, 12000, 80);
   let locomotive1_1 = new Locomotive(2400, 11000, 70)
   // creating passengerwagon objects with the class PassengerWagon, and the arguments: length, width.
-  let passengerWagon1 = new PassengerWagon(12, 2.6);
-  let passengerWagon1_1 = new PassengerWagon(8, 2)
+  let passengerWagon1 = new PassengerWagon(12, 2.6, 1);
+  let passengerWagon1_1 = new PassengerWagon(8, 2, 2)
   // Creating freightWagon objects with the class FreightWagon, and the arguments: maximumLoad. 
-  let freightWagon1 = new FreightWagon(5000);
-  let freightWagon1_1 = new FreightWagon(1000)
+  let freightWagon1 = new FreightWagon(5000, 3);
+  let freightWagon1_1 = new FreightWagon(1000, 4)
   
   // Using the method "addLocomotive" from the class Formation to add the locomotive objects.
   formation1.addLocomotive(locomotive1);
@@ -295,8 +298,8 @@ class Formation {
   // Formation two:
   let formation2 = new Formation();
   let locomotive2 = new Locomotive(1200, 15000, 70);
-  let passengerWagon2 = new PassengerWagon(8, 2.5);
-  let freightWagon2 = new FreightWagon(8, 6000);
+  let passengerWagon2 = new PassengerWagon(8, 2.5, 5);
+  let freightWagon2 = new FreightWagon(8, 6000, 6);
   
   formation2.addLocomotive(locomotive2);
   formation2.addWagon(passengerWagon2);
@@ -331,7 +334,7 @@ class Formation {
   
   // Depot solutions
   console.log("\nDepot Solutions: ")
-  console.log("7. The heaviest wagons are: " + JSON.stringify(depot.heaviestWagons()));
+  console.log("7. The heaviest wagons IDs are: " + depot.heaviestWagons());
   console.log("8.", depot.experiencedDriver());
   console.log("\n9.")
   depot.addLocomotiveToFormation();  
